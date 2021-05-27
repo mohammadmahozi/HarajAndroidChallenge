@@ -1,24 +1,28 @@
 package com.example.harajtask.post.list
 
 import android.text.format.DateUtils
-import java.time.format.DateTimeFormatter
-import java.util.*
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-class PostModel(
+@JsonClass(generateAdapter = true)
+data class PostModel(
 
     val title: String,
-    unixDate: String,
+    @Json(name = "date")
+    val unixTimestamp: String,
+    @Json(name = "username")
     val poster: String,
-    val location: String,
+    val city: String,
+    @Json(name = "body")
     val description: String,
-    val imageUrl: String
+    val thumbURL: String
 
     ){
 
     val timeSincePost: String
 
     init {
-        timeSincePost = getTimeSincePost(unixDate.toLong() * 1000)
+        timeSincePost = getTimeSincePost(unixTimestamp.toLong() * 1000)
     }
 
 

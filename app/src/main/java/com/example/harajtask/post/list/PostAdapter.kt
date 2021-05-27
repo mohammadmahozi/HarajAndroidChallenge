@@ -28,7 +28,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
             titleTextView.text = post.title
             timeTextView.text = post.timeSincePost
             posterTextView.text = post.poster
-            locationTextView.text = post.location
+            locationTextView.text = post.city
 
         }
     }
