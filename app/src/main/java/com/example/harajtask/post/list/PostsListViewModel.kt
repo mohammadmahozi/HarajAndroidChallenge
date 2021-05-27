@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class PostsListViewModel(val assetManager: AssetManager): ViewModel() {
@@ -14,7 +16,7 @@ class PostsListViewModel(val assetManager: AssetManager): ViewModel() {
 
     fun parsePostsJson(){
 
-        viewModelScope.apply {
+        viewModelScope.launch(Dispatchers.IO) {
 
             val postsJsonString = loadJsonAsset()
             try {
@@ -23,10 +25,7 @@ class PostsListViewModel(val assetManager: AssetManager): ViewModel() {
                 val listPostType = Types.newParameterizedType(List::class.java, PostModel::class.java)
                 val jsonAdapter = moshi.adapter<List<PostModel>>(listPostType)
 
-                Log.d("gggg", "parsePostsJson: ")
-
                 val postsList = jsonAdapter.fromJson(postsJsonString)
-                Log.d("gggg", "parsePostsJson: ${postsList?.get(0)}")
 
             }
 
