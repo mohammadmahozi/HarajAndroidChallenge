@@ -26,7 +26,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
         fun bind(post: PostModel) {
 
             titleTextView.text = post.title
-
+            timeTextView.text = post.timeSincePost
             posterTextView.text = post.poster
             locationTextView.text = post.location
 
