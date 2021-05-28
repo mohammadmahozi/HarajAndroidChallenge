@@ -11,7 +11,8 @@ import com.example.harajtask.R
 class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
 
-    val postsList = listOf<PostModel>()
+    var postsList = listOf<PostModel>()
+
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 

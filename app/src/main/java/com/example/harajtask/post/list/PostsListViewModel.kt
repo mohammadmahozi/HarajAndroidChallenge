@@ -14,7 +14,7 @@ class PostsListViewModel(private val assetManager: AssetManager): ViewModel() {
 
 
 
-    val postsLiveDataList = liveData {
+    val postsLiveDataList = liveData(context = Dispatchers.IO) {
 
         val postsListResult = getPostsList()
         emit(postsListResult)
