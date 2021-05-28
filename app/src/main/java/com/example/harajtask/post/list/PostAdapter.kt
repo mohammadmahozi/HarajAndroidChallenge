@@ -21,6 +21,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
         private val timeTextView: TextView = itemView.findViewById(R.id.post_time)
         private val posterTextView: TextView = itemView.findViewById(R.id.poster)
         private val locationTextView: TextView = itemView.findViewById(R.id.post_location)
+        private val commentCountTextView: TextView  = itemView.findViewById(R.id.comment_count)
 
 
 
@@ -30,6 +31,7 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
             timeTextView.text = post.timeSincePost
             posterTextView.text = post.poster
             locationTextView.text = post.city
+            commentCountTextView.text = post.commentCount
 
         }
     }

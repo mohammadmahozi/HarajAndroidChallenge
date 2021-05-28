@@ -8,13 +8,20 @@ import com.squareup.moshi.JsonClass
 data class PostModel(
 
     val title: String,
+
     @Json(name = "date")
     val unixTimestamp: String,
+
+    val commentCount: String,
+
     @Json(name = "username")
     val poster: String,
+
     val city: String,
+
     @Json(name = "body")
     val description: String,
+
     val thumbURL: String
 
     ){

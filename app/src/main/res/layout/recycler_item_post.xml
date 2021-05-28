@@ -43,7 +43,7 @@
         android:layout_marginTop="16dp"
         android:text="Post location"
         app:layout_constraintStart_toEndOf="@+id/post_image"
-        app:layout_constraintTop_toBottomOf="@+id/comments_number" />
+        app:layout_constraintTop_toBottomOf="@+id/comment_count" />
 
     <TextView
         android:id="@+id/poster"
@@ -52,14 +52,14 @@
         android:layout_marginTop="16dp"
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comments_number" />
+        app:layout_constraintTop_toBottomOf="@+id/comment_count" />
 
     <TextView
-        android:id="@+id/comments_number"
+        android:id="@+id/comment_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Comments number"
+        android:text="Comment count"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_time" />
 </androidx.constraintlayout.widget.ConstraintLayout>
