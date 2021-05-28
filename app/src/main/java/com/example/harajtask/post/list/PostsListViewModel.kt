@@ -2,40 +2,30 @@ package com.example.harajtask.post.list
 
 import android.content.res.AssetManager
 import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
+import com.example.harajtask.Result
 
-class PostsListViewModel(val assetManager: AssetManager): ViewModel() {
+class PostsListViewModel(private val assetManager: AssetManager): ViewModel() {
 
 
-    fun parsePostsJson(){
 
-        viewModelScope.launch(Dispatchers.IO) {
+    val postsLiveDataList = liveData {
+
+        val postsListResult = getPostsList()
+        emit(postsListResult)
+
+    }
+
+    private fun getPostsList(): Result<List<PostModel>>{
 
             val postsJsonString = loadJsonAsset()
-            try {
 
-                val moshi = Moshi.Builder().build()
-                val listPostType = Types.newParameterizedType(List::class.java, PostModel::class.java)
-                val jsonAdapter = moshi.adapter<List<PostModel>>(listPostType)
-
-                val postsList = jsonAdapter.fromJson(postsJsonString)
-
-            }
-
-            catch (e: Exception){
-
-                Log.d("gggg", "parsePostsJson: ${e.message}")
-            }
-
-
-        }
+            return parseJsonToPosts(postsJsonString)
     }
 
 
@@ -44,6 +34,27 @@ class PostsListViewModel(val assetManager: AssetManager): ViewModel() {
         return assetManager.open("data.json")
             .bufferedReader()
             .use { it.readText() }
+    }
+
+    private fun parseJsonToPosts(jsonString: String): Result<List<PostModel>> {
+
+        return try {
+
+            val moshi = Moshi.Builder().build()
+            val listPostType = Types.newParameterizedType(List::class.java, PostModel::class.java)
+            val jsonAdapter = moshi.adapter<List<PostModel>>(listPostType)
+
+            val postsList = jsonAdapter.fromJson(jsonString)
+
+            Result.Success(postsList!!)
+
+        }
+
+        catch (e: Exception){
+
+            Result.Error(e)
+        }
+
     }
 
 
