@@ -10,22 +10,24 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.harajtask.R
+import com.example.harajtask.post.PostModel
 
 class PostAdapter(
-    private val onItemClicked: (PostModel) -> Unit): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+    private val onItemClicked: (PostModel) -> Unit
+) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
 
     var postsList = listOf<PostModel>()
 
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val postImageView: ImageView = itemView.findViewById(R.id.post_image)
         private val titleTextView: TextView = itemView.findViewById(R.id.post_title)
         private val timeTextView: TextView = itemView.findViewById(R.id.post_date_time)
         private val posterTextView: TextView = itemView.findViewById(R.id.username)
         private val locationTextView: TextView = itemView.findViewById(R.id.post_location)
-        private val commentCountTextView: TextView  = itemView.findViewById(R.id.comment_count)
+        private val commentCountTextView: TextView = itemView.findViewById(R.id.comment_count)
 
 
         init {
@@ -55,9 +57,9 @@ class PostAdapter(
 
         }
 
-        private fun formatCommentCount(commentCount: String): String{
+        private fun formatCommentCount(commentCount: String): String {
 
-            if (commentCount == "0"){
+            if (commentCount == "0") {
                 //remove comment icon
                 commentCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
                 return ""
@@ -69,7 +71,8 @@ class PostAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_post, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_post, parent, false)
         return ViewHolder(view)
     }
 

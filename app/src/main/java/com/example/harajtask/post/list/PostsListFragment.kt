@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.harajtask.R
 import com.example.harajtask.Result
+import com.example.harajtask.post.PostModel
 import com.example.harajtask.post.PostViewModel
 import com.example.harajtask.post.details.PostDetailsFragment
 
@@ -57,11 +58,13 @@ class PostsListFragment: Fragment() {
             when (it) {
 
                 is Result.Success -> updateAdapterData(it.data)
-                is Result.Error -> Toast.makeText(
-                    requireContext(),
-                    "Error loading data",
-                    Toast.LENGTH_LONG
-                ).show()
+                is Result.Error -> {
+                    Toast.makeText(
+                        requireContext(),
+                        R.string.error_loading,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
 
         })

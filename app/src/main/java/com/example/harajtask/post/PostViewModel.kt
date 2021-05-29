@@ -7,7 +7,6 @@ import com.squareup.moshi.Types
 import kotlinx.coroutines.Dispatchers
 import java.lang.Exception
 import com.example.harajtask.Result
-import com.example.harajtask.post.list.PostModel
 
 class PostViewModel(private val assetManager: AssetManager): ViewModel() {
 
@@ -18,7 +17,6 @@ class PostViewModel(private val assetManager: AssetManager): ViewModel() {
 
         val postsListResult = getPostsList()
         emit(postsListResult)
-
     }
 
 
@@ -35,18 +33,24 @@ class PostViewModel(private val assetManager: AssetManager): ViewModel() {
 
             it.title.contains(query)
         }
-
-
-
     }
+
+
     private fun getPostsList(): Result<List<PostModel>>{
+
+        return try {
 
             val postsJsonString = loadJsonAsset()
 
-            return parseJsonToPosts(postsJsonString)
+            val postsList = parseJsonToPosts(postsJsonString)
+            Result.Success(postsList!!)
+        }
+
+        catch (e: Exception){
+
+            Result.Error(e)
+        }
     }
-
-
 
 
     private fun loadJsonAsset(): String{
@@ -56,25 +60,13 @@ class PostViewModel(private val assetManager: AssetManager): ViewModel() {
             .use { it.readText() }
     }
 
-    private fun parseJsonToPosts(jsonString: String): Result<List<PostModel>> {
-
-        return try {
+    private fun parseJsonToPosts(jsonString: String): List<PostModel>? {
 
             val moshi = Moshi.Builder().build()
             val listPostType = Types.newParameterizedType(List::class.java, PostModel::class.java)
             val jsonAdapter = moshi.adapter<List<PostModel>>(listPostType)
 
-            val postsList = jsonAdapter.fromJson(jsonString)
-
-            Result.Success(postsList!!)
-
-        }
-
-        catch (e: Exception){
-
-            Result.Error(e)
-        }
-
+            return jsonAdapter.fromJson(jsonString)
     }
 
 

@@ -1,4 +1,4 @@
-package com.example.harajtask.post.list
+package com.example.harajtask.post
 
 import android.text.format.DateFormat
 import android.text.format.DateUtils

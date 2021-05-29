@@ -4,4 +4,5 @@
     <string name="close">Close</string>
     <string name="search_title">Search posts</string>
     <string name="share">Share</string>
+    <string name="error_loading">Error loading data</string>
 </resources>
