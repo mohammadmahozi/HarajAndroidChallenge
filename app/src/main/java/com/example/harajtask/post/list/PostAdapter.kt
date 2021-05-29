@@ -31,8 +31,21 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
             timeTextView.text = post.timeSincePost
             posterTextView.text = post.poster
             locationTextView.text = post.city
-            commentCountTextView.text = post.commentCount
 
+
+            commentCountTextView.text = formatCommentCount(post.commentCount)
+
+        }
+
+        private fun formatCommentCount(commentCount: String): String{
+
+            if (commentCount == "0"){
+                //remove comment icon
+                commentCountTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+                return ""
+            }
+
+            return "($commentCount)"
         }
     }
 
