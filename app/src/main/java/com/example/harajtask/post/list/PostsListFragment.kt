@@ -1,6 +1,7 @@
 package com.example.harajtask.post.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
@@ -15,7 +16,7 @@ import com.example.harajtask.Result
 class PostsListFragment: Fragment() {
 
 
-    private val postAdapter: PostAdapter by lazy { PostAdapter() }
+    private val postAdapter: PostAdapter by lazy { PostAdapter(this::onPostClicked) }
 
     private val postsListViewModel: PostsListViewModel by lazy {
         ViewModelProvider(
@@ -35,6 +36,11 @@ class PostsListFragment: Fragment() {
     }
 
 
+    private fun onPostClicked(postModel: PostModel){
+
+        Log.d("gggg", "onPostClicked: ${postModel.title}")
+
+    }
 
 
     override fun onCreateView(

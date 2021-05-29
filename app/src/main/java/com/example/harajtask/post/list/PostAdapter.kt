@@ -11,13 +11,14 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.harajtask.R
 
-class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(
+    private val onItemClicked: (PostModel) -> Unit): RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
 
     var postsList = listOf<PostModel>()
 
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
         private val postImageView: ImageView = itemView.findViewById(R.id.post_image)
         private val titleTextView: TextView = itemView.findViewById(R.id.post_title)
@@ -27,6 +28,11 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
         private val commentCountTextView: TextView  = itemView.findViewById(R.id.comment_count)
 
 
+        init {
+            itemView.setOnClickListener {
+                onItemClicked(postsList[absoluteAdapterPosition])
+            }
+        }
 
         fun bind(post: PostModel) {
 
