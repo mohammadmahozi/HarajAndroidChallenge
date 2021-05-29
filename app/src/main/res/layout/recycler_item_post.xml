@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"
+    >
 
     <ImageView
         android:id="@+id/post_image"
@@ -17,11 +19,12 @@
 
     <TextView
         android:id="@+id/post_title"
-        android:layout_width="247dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:maxLines="1"
         android:text="Post Title"
+        android:textAlignment="viewEnd"
         android:textColor="@color/postTitle"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +37,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Post time"
-        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_title" />
 

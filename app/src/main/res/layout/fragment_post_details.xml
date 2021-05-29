@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
 
-    android:paddingBottom="32dp"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="32dp"
+    >
 
     <ImageView
         android:id="@+id/post_details_image"
@@ -45,7 +46,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Post time"
-        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_details_title" />
 
@@ -103,8 +103,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="+966550000098"
+
         android:textColor="@android:color/holo_blue_dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_details_contact_label" />
