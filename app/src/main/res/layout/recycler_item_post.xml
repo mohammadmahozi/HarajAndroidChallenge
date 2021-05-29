@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/post_time"
+        android:id="@+id/post_date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
         />
 
     <TextView
-        android:id="@+id/poster"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -69,7 +69,7 @@
         android:layout_marginTop="16dp"
         android:text="Comment count"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_time"
+        app:layout_constraintTop_toBottomOf="@+id/post_date_time"
         app:drawableEndCompat="@drawable/ic_comment"
         android:drawablePadding="4dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

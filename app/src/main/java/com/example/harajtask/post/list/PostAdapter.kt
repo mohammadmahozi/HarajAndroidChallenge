@@ -22,8 +22,8 @@ class PostAdapter(
 
         private val postImageView: ImageView = itemView.findViewById(R.id.post_image)
         private val titleTextView: TextView = itemView.findViewById(R.id.post_title)
-        private val timeTextView: TextView = itemView.findViewById(R.id.post_time)
-        private val posterTextView: TextView = itemView.findViewById(R.id.poster)
+        private val timeTextView: TextView = itemView.findViewById(R.id.post_date_time)
+        private val posterTextView: TextView = itemView.findViewById(R.id.username)
         private val locationTextView: TextView = itemView.findViewById(R.id.post_location)
         private val commentCountTextView: TextView  = itemView.findViewById(R.id.comment_count)
 
