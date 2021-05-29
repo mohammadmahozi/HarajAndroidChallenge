@@ -21,12 +21,32 @@ class PostsListViewModel(private val assetManager: AssetManager): ViewModel() {
 
     }
 
+
+    fun getFilteredPosts(query: String): List<PostModel>{
+
+        if (postsLiveDataList.value == null || postsLiveDataList.value is Result.Error){
+
+            return listOf()
+        }
+
+        val postsList = (postsLiveDataList.value as Result.Success<List<PostModel>>).data
+
+        return postsList.filter {
+
+            it.title.contains(query)
+        }
+
+
+
+    }
     private fun getPostsList(): Result<List<PostModel>>{
 
             val postsJsonString = loadJsonAsset()
 
             return parseJsonToPosts(postsJsonString)
     }
+
+
 
 
     private fun loadJsonAsset(): String{

@@ -1,5 +1,7 @@
 package com.example.harajtask.post.list
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -27,6 +29,8 @@ class PostsListFragment: Fragment() {
 
         ).get(PostsListViewModel::class.java)
     }
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,15 +69,6 @@ class PostsListFragment: Fragment() {
         return inflater.inflate(R.layout.fragment_posts_list, container, false)
     }
 
-    private fun updateAdapterData(data: List<PostModel>){
-
-        postAdapter .apply {
-
-            postsList = data
-            notifyDataSetChanged()
-        }
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,6 +86,51 @@ class PostsListFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.post_list_fragment_menu, menu)
 
+        val searchView = menu.findItem(R.id.product_search).actionView as SearchView
+        initiateSearchView(searchView)
+
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+    private fun initiateSearchView(searchView: SearchView){
+
+        // Associate searchable configuration with the SearchView
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+        searchView.apply {
+
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+
+            setOnQueryTextListener(buildSearchQueryTextListener())
+        }
+
+    }
+
+    private fun buildSearchQueryTextListener(): SearchView.OnQueryTextListener{
+
+        return object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                updateAdapterData(postsListViewModel.getFilteredPosts(newText))
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+
+                return true
+            }
+        }
+    }
+
+    private fun updateAdapterData(data: List<PostModel>){
+
+        postAdapter .apply {
+
+            postsList = data
+            notifyDataSetChanged()
+        }
+    }
+
+
+
 }
