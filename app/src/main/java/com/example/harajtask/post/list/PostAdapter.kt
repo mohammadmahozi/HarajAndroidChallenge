@@ -45,7 +45,7 @@ class PostAdapter(
 
             titleTextView.text = post.title
             timeTextView.text = post.timeSincePost
-            posterTextView.text = post.poster
+            posterTextView.text = post.username
             locationTextView.text = post.city
             commentCountTextView.text = formatCommentCount(post.commentCount)
 

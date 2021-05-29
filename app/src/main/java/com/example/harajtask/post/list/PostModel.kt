@@ -1,5 +1,6 @@
 package com.example.harajtask.post.list
 
+import android.text.format.DateFormat
 import android.text.format.DateUtils
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -14,13 +15,11 @@ data class PostModel(
 
     val commentCount: String,
 
-    @Json(name = "username")
-    val poster: String,
+    val username: String,
 
     val city: String,
 
-    @Json(name = "body")
-    val description: String,
+    val body: String,
 
     val thumbURL: String
 
@@ -28,13 +27,22 @@ data class PostModel(
 
     val timeSincePost: String
 
+    val formattedDateTime: String
+
     init {
+        //multiply to add milliseconds
         timeSincePost = getTimeSincePost(unixTimestamp.toLong() * 1000)
+        formattedDateTime = getFormattedDateTime(unixTimestamp.toLong() * 1000)
     }
 
 
     private fun getTimeSincePost(timeInMillis: Long): String{
 
         return DateUtils.getRelativeTimeSpanString(timeInMillis).toString()
+    }
+
+    private fun getFormattedDateTime(timeInMillis: Long): String{
+
+        return DateFormat.format("yyyy/MM/dd hh:mm aa", timeInMillis).toString()
     }
 }
