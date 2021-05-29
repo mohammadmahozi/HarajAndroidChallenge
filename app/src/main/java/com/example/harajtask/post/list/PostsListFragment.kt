@@ -3,31 +3,33 @@ package com.example.harajtask.post.list
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.harajtask.R
 import com.example.harajtask.Result
+import com.example.harajtask.post.PostViewModel
+import com.example.harajtask.post.details.PostDetailsFragment
 
 class PostsListFragment: Fragment() {
 
 
     private val postAdapter: PostAdapter by lazy { PostAdapter(this::onPostClicked) }
 
-    private val postsListViewModel: PostsListViewModel by lazy {
+    private val postViewModel: PostViewModel by lazy {
         ViewModelProvider(
-            this,
-            PostsListViewModel.Factory(
+            requireActivity(),
+            PostViewModel.Factory(
                 requireContext().assets
             )
 
-        ).get(PostsListViewModel::class.java)
+        ).get(PostViewModel::class.java)
     }
 
 
@@ -40,12 +42,6 @@ class PostsListFragment: Fragment() {
     }
 
 
-    private fun onPostClicked(postModel: PostModel){
-
-        Log.d("gggg", "onPostClicked: ${postModel.title}")
-
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,12 +52,16 @@ class PostsListFragment: Fragment() {
 
         setHasOptionsMenu(true)
 
-        postsListViewModel.postsLiveDataList.observe(viewLifecycleOwner, Observer {
+        postViewModel.postsLiveDataList.observe(viewLifecycleOwner, Observer {
 
-            when(it){
+            when (it) {
 
                 is Result.Success -> updateAdapterData(it.data)
-                is Result.Error -> Toast.makeText(requireContext(), "Error loading data", Toast.LENGTH_LONG).show()
+                is Result.Error -> Toast.makeText(
+                    requireContext(),
+                    "Error loading data",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
         })
@@ -111,7 +111,7 @@ class PostsListFragment: Fragment() {
         return object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
 
-                updateAdapterData(postsListViewModel.getFilteredPosts(newText))
+                updateAdapterData(postViewModel.getFilteredPosts(newText))
                 return true
             }
 
@@ -131,6 +131,25 @@ class PostsListFragment: Fragment() {
         }
     }
 
+
+    private fun onPostClicked(postModel: PostModel){
+
+        postViewModel.selectedPost = postModel
+
+        navigateToPostDetails()
+    }
+
+    private fun navigateToPostDetails() {
+
+        val postDetailsFragment = PostDetailsFragment()
+
+        fragmentManager!!
+            .beginTransaction()
+            .replace(R.id.container, postDetailsFragment, "PostDetailsFragment")
+            .addToBackStack(null)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+    }
 
 
 }

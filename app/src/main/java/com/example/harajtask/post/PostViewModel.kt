@@ -1,18 +1,18 @@
-package com.example.harajtask.post.list
+package com.example.harajtask.post
 
 import android.content.res.AssetManager
-import android.util.Log
 import androidx.lifecycle.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.lang.Exception
 import com.example.harajtask.Result
+import com.example.harajtask.post.list.PostModel
 
-class PostsListViewModel(private val assetManager: AssetManager): ViewModel() {
+class PostViewModel(private val assetManager: AssetManager): ViewModel() {
 
 
+    lateinit var selectedPost: PostModel
 
     val postsLiveDataList = liveData(context = Dispatchers.IO) {
 
@@ -82,7 +82,7 @@ class PostsListViewModel(private val assetManager: AssetManager): ViewModel() {
 
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-            return PostsListViewModel(assetManager) as T
+            return PostViewModel(assetManager) as T
         }
     }
 }
