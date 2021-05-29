@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.harajtask.R
 
 class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
@@ -27,12 +30,17 @@ class PostAdapter: RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
         fun bind(post: PostModel) {
 
+            Glide
+                .with(postImageView.context)
+                .load(post.thumbURL)
+                .transform(CenterCrop(), RoundedCorners(50))
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .into(postImageView)
+
             titleTextView.text = post.title
             timeTextView.text = post.timeSincePost
             posterTextView.text = post.poster
             locationTextView.text = post.city
-
-
             commentCountTextView.text = formatCommentCount(post.commentCount)
 
         }
