@@ -1,9 +1,8 @@
 package com.example.harajtask.post.details
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -56,6 +55,36 @@ class PostDetailsFragment: Fragment() {
             view.findViewById<TextView>(R.id.post_details_body).text = body
 
         }
+
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.post_details_fragment_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.post_details_share_menu_item){
+
+            sharePost()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun sharePost() {
+
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, postViewModel.selectedPost.title)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
 
     }
 }
