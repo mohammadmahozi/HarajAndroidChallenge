@@ -9,7 +9,7 @@
 
     <ImageView
         android:id="@+id/post_image"
-        android:layout_width="101dp"
+        android:layout_width="118dp"
         android:layout_height="126dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -17,12 +17,15 @@
 
     <TextView
         android:id="@+id/post_title"
-        android:layout_width="wrap_content"
+        android:layout_width="247dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:maxLines="1"
         android:text="Post Title"
         android:textColor="@color/postTitle"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/post_image"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
