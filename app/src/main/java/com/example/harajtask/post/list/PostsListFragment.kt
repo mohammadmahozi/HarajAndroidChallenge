@@ -74,7 +74,7 @@ class PostsListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val postsRecyclerView = view.findViewById<RecyclerView>(R.id.posts_recycler_view).apply {
+        view.findViewById<RecyclerView>(R.id.posts_recycler_view).apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }

@@ -36,18 +36,22 @@ class PostAdapter(
 
         fun bind(post: PostModel) {
 
-            Glide
-                .with(postImageView.context)
-                .load(post.thumbURL)
-                .transform(CenterCrop(), RoundedCorners(50))
-                .placeholder(R.drawable.ic_baseline_image_24)
-                .into(postImageView)
+            post.apply {
 
-            titleTextView.text = post.title
-            timeTextView.text = post.timeSincePost
-            posterTextView.text = post.username
-            locationTextView.text = post.city
-            commentCountTextView.text = formatCommentCount(post.commentCount)
+                Glide
+                    .with(postImageView.context)
+                    .load(thumbURL)
+                    .transform(CenterCrop(), RoundedCorners(50))
+                    .placeholder(R.drawable.ic_baseline_image_24)
+                    .into(postImageView)
+
+                titleTextView.text = title
+                timeTextView.text = timeSincePost
+                posterTextView.text = username
+                locationTextView.text = city
+                commentCountTextView.text = formatCommentCount(commentCount)
+            }
+
 
         }
 
