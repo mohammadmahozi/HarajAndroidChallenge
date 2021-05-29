@@ -1,10 +1,9 @@
 package com.example.harajtask.post.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,6 +43,9 @@ class PostsListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+
+        setHasOptionsMenu(true)
+
         postsListViewModel.postsLiveDataList.observe(viewLifecycleOwner, Observer {
 
             when(it){
@@ -77,5 +79,12 @@ class PostsListFragment: Fragment() {
         }
 
 
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.post_list_fragment_menu, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }
