@@ -1,9 +1,9 @@
 package com.example.harajtask
 
 import android.os.Bundle
-import android.text.format.DateUtils
-import android.util.Log
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.harajtask.post.list.PostsListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -15,10 +15,13 @@ class MainActivity : AppCompatActivity() {
         val postsListFragment = PostsListFragment()
         supportFragmentManager.beginTransaction().add(R.id.container, postsListFragment).commit()
 
-        val x = DateUtils.getRelativeTimeSpanString(1621848879)
+        setSupportActionBar(findViewById(R.id.toolbar))
 
+        val drawer: DrawerLayout = findViewById(R.id.drawer)
+        val drawerToggle = ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close)
+        drawer.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
 
-        Log.d("gggg", "addition_isCorrect: $x")
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

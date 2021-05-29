@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+
+        <!-- For hamburger icon color -->
+        <item name="colorControlNormal">@android:color/white</item>
+
+    </style>
+
 </resources>
